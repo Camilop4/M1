@@ -7,10 +7,15 @@ Determiná que será impreso en la consola, sin ejecutar el código.
 
 > Investiga cuál es la diferencia entre declarar una variable con `var` y directamente asignarle un valor.
 
+RTA: si se declara la variable con var en la consola me muestra undedined, mientras que al momento de asiganarle un valor directamente en la consola me muestra el valor asignado 
+
 ```javascript
 x = 1;
+1;
 var a = 5;
+undefined;
 var b = 10;
+undefined;
 var c = function(a, b, c) {
   var x = 10;
   console.log(x);
@@ -25,17 +30,32 @@ var c = function(a, b, c) {
   console.log(b);
 }
 c(8,9,10);
+10
+// 8 me hizo falta un 8 porque c() contiene a f() y aqui b = a por esto se refleja dos veces 8 en la consola 
+8
+9
+undefined;
 console.log(b);
+10;
 console.log(x);
+1;
+
 ```
 
 ```javascript
 console.log(bar);
+1 // RTa la respuesta correcta es: bar is not definedent list
 console.log(baz);
+undefined // RTa la respuesta correcta es: baz is not defined
 foo();
+"Hola!" // RTa la respuesta correcta es: foo is not defined
 function foo() { console.log('Hola!'); }
+undefined
 var bar = 1;
+undefined
 baz = 2;
+2
+
 ```
 
 ```javascript
@@ -44,31 +64,43 @@ if(true) {
     var instructor = "Franco";
 }
 console.log(instructor);
+"Tony"
+// RTa la respuesta correcta es: "Franco" ya que se sobre escribe la variable "instructor" en el if 
 ```
 
 ```javascript
 var instructor = "Tony";
 console.log(instructor);
+"Tony"
 (function() {
    if(true) {
       var instructor = "Franco";
       console.log(instructor);
    }
 })();
+"Franco"
 console.log(instructor);
+"Franco"
 ```
 
 ```javascript
 var instructor = "Tony";
+undefined
 let pm = "Franco";
+undefined
 if (true) {
     var instructor = "The Flash";
     let pm = "Reverse Flash";
     console.log(instructor);
     console.log(pm);
 }
+"The Flash"
+"The Reverse"
 console.log(instructor);
+"Tony" // RTa la respuesta correcta es: "The Flash" porque en if tambien se declara con var y por eso se sobre escribe la variable
 console.log(pm);
+"Franco"
+
 ```
 ### Coerción de Datos
 
@@ -76,19 +108,33 @@ console.log(pm);
 
 ```javascript
 6 / "3"
+2
 "2" * "3"
+6
 4 + 5 + "px"
+"9px"
 "$" + 4 + 5
+"$45"
 "4" - 2
+2
 "4px" - 2
+NaN
 7 / 0
+"infinity"
 {}[0]
+undefined
 parseInt("09")
+9
 5 && 2
+2
 2 && 5
+5
 5 || 0
+5
 0 || 5
+5
 [3]+[3]-[10]
+
 3>2>1
 [] == ![]
 ```
@@ -112,6 +158,8 @@ function test() {
 }
 
 test();
+2 // solo muestra en consola este valor debido a que las demas declaciones no tienen contexto de ejecucion, mientras que dentro de la funcion de test hay una function llamada foo que returna 2 en cambio las primeras declaraciones no tienen ningun contexto.
+
 ```
 
 Y el de este código? :
@@ -128,6 +176,7 @@ function getFood(food) {
 }
 
 getFood(false);
+undefined // debido a que se le esta dando un valor false al argunmento de la funcion.
 ```
 
 
@@ -148,10 +197,13 @@ var obj = {
 };
 
 console.log(obj.prop.getFullname());
+"Aurelio De Rosa" // porque en este contexto de ejecucion el this. se refiere a prop y el fullname es la propiedad de prop.
 
 var test = obj.prop.getFullname;
 
 console.log(test());
+"Juan Perez" // porque en este contexto de ejecucion el this. no tiene a quien referenciar y busca en el global.
+
 ```
 
 ### Event loop
@@ -167,4 +219,11 @@ function printing() {
 }
 
 printing();
+1
+4
+3
+
+2
+
+// Se imprime o se muestra en ese orden debido a los timeout que se le asiganan a 2 y 3 los otros 1 y 4 al no tener time aout se muestran instataneos y por contexto de ejecucion.
 ```
