@@ -23,7 +23,7 @@ function counter() {
   return function nuevoContador() {
     num++;
     return num;
-    return function nuevoContador() {
+    return function otroContador() {
       num++;
       return num;
     }
@@ -62,7 +62,7 @@ function cacheFunction(cb) {
       let result = cb(arg);
       obj[arg] = result;
       return result;
-    }
+    };
 }
 
 // Bind
@@ -117,4 +117,4 @@ module.exports = {
   textoAsteriscos,
   textoGuiones,
   textoUnderscore,
-};
+}
